@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruang Kenangan Kita | 3 Tahun Bersama</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #f8e8ff 100%);
+            color: #4a1e3a;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: #ff6b9d;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        /* Intro Section */
+        .intro {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at center, rgba(255,107,157,0.1) 0%, transparent 70%);
+        }
+
+        .intro h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #c084fc, #ff6b9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+
+        .intro p {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            font-weight: 300;
+            max-width: 600px;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1s forwards;
+        }
+
+        .enter-btn {
+            margin-top: 2rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(45deg, #ff6b9d, #c084fc);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1.5s forwards;
+            box-shadow: 0 10px 30px rgba(255,107,157,0.3);
+        }
+
+        .enter-btn:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,107,157,0.4);
+        }
+
+        /* Main Content */
+        .content {
+            display: none;
+            min-height: 100vh;
+            padding: 4rem 2rem;
+        }
+
+        /* Section Styles */
+        .section {
+            max-width: 900px;
+            margin: 0 auto 6rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .section.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b9d, #c084fc);
+            border-radius: 2px;
+        }
+
+        /* Story Cards */
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .story-card {
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,107,157,0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b9d, #c084fc, #ff6b9d);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+
+        .story-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .story-card i {
+            font-size: 2.5rem;
+            color: #ff6b9d;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Moments List */
+        .moments-list {
+            list-style: none;
+            max-width: 700px;
+            margin: 3rem auto 0;
+        }
+
+        .moments-list li {
+            background: rgba(255,255,255,0.7);
+            margin-bottom: 1.5rem;
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            border-left: 5px solid #ff6b9d;
+            transition: all 0.3s ease;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .moments-list li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(255,107,157,0.2);
+        }
+
+        /* Secret Surprise */
+        .surprise {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #ff6b9d20, #c084fc20);
+            border-radius: 30px;
+            margin: 4rem auto;
+            max-width: 700px;
+            display: none;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 1s ease;
+        }
+
+        .surprise.show {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .secret-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff6b9d, #c084fc);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size
